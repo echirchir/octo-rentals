@@ -2,6 +2,7 @@ package ke.co.codingcamp.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,22 +25,29 @@ public class RentalsController{
     @Autowired
     private RentalsService rentalsService;
 
-    @GetMapping("/api/v1/rentals/")
-    @ResponseBody
+    @GetMapping("/api/v1/rentals")
     public ResponseEntity<List<Rental>> all(){
         
         List<Rental> allRentals = rentalsService.findAll();
 
-        if (allRentals.isEmpty()){
+        /*if (allRentals.isEmpty()){
             return ResponseEntity.notFound().build();
         }else{
             return ResponseEntity.ok(allRentals);
-        }
+        }*/
+
+        List<Rental> list = new ArrayList<>();
+        list.add(new Rental());
+        list.add(new Rental());
+        list.add(new Rental());
+
+        return ResponseEntity.ok(list);
         
     }
 
-    @PostMapping("/api/v1/rentals/")
+    @PostMapping("/api/v1/rentals")
     public ResponseEntity<Rental> create(@RequestBody Rental rental) throws URISyntaxException {
+        
         Rental createdRental = rentalsService.create(rental);
         if (createdRental == null) {
             return ResponseEntity.notFound().build();
