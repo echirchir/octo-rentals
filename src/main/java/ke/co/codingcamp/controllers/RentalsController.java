@@ -30,24 +30,22 @@ public class RentalsController{
         
         List<Rental> allRentals = rentalsService.findAll();
 
-        /*if (allRentals.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }else{
-            return ResponseEntity.ok(allRentals);
-        }*/
+        System.out.println(allRentals.size());
+        
+        return ResponseEntity.ok(allRentals);
 
-        List<Rental> list = new ArrayList<>();
+        /*List<Rental> list = new ArrayList<>();
         list.add(new Rental());
         list.add(new Rental());
         list.add(new Rental());
 
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(list);*/
         
     }
 
     @PostMapping("/api/v1/rentals")
     public ResponseEntity<Rental> create(@RequestBody Rental rental) throws URISyntaxException {
-        
+
         Rental createdRental = rentalsService.create(rental);
         if (createdRental == null) {
             return ResponseEntity.notFound().build();
