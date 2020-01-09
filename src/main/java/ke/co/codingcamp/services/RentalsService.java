@@ -24,21 +24,23 @@ public class RentalsService{
         return rentalsRepository.findById(id).orElse(null);
     }
 
-    public Integer saveRental(Rental rental){
+    public Rental create(Rental rental){
 
-        Rental savedRental = rentalsRepository.save(rental);
-
-        return savedRental.getId();
+        return rentalsRepository.save(rental);
     }
 
-    public Integer updateRental(Rental rental){
+    public Rental update(Integer id, Rental rental){
 
-        Rental updatedRental = rentalsRepository.save(rental);
+        Rental toUpdate = rentalsRepository.findById(id).orElse(null);
 
-        return updatedRental.getId();
+        if (toUpdate == null){
+            return null;
+        }else{
+            return rentalsRepository.save(rental);
+        }
     }
 
-    public void deleteRental(Integer id){
+    public void delete(Integer id){
 
         rentalsRepository.deleteById(id);
     
