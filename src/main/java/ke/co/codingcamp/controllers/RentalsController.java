@@ -31,7 +31,7 @@ public class RentalsController{
         List<Rental> allRentals = rentalsService.findAll();
 
         System.out.println(allRentals.size());
-        
+
         return ResponseEntity.ok(allRentals);
 
         /*List<Rental> list = new ArrayList<>();
@@ -43,10 +43,11 @@ public class RentalsController{
         
     }
 
-    @PostMapping("/api/v1/rentals")
-    public ResponseEntity<Rental> create(@RequestBody Rental rental) throws URISyntaxException {
+    @PostMapping("/api/v1/rentals/{id}")
+    public ResponseEntity<Rental> create(@RequestBody Rental rental, @PathVariable Integer id) throws URISyntaxException {
 
-        Rental createdRental = rentalsService.create(rental);
+        Rental createdRental = rentalsService.create(rental, id);
+
         if (createdRental == null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -71,10 +72,11 @@ public class RentalsController{
         }
     }
 
-    @PutMapping("/api/v1/rentals/{id}")
-    public ResponseEntity<Rental> update(@RequestBody Rental rental, @PathVariable Integer id) {
+    @PutMapping("/api/v1/rentals/{id}/{tenant}")
+    public ResponseEntity<Rental> update(@RequestBody Rental rental, @PathVariable Integer id, @PathVariable Integer tenant)
 
-        Rental updatedRental = rentalsService.update(id, rental);
+        Rental updatedRental = rentalsService.update(id, rental, tenant);
+        
         if (updatedRental == null) {
             return ResponseEntity.notFound().build();
         } else {

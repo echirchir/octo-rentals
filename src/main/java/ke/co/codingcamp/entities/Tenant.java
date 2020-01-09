@@ -1,6 +1,6 @@
 package ke.co.codingcamp.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +22,7 @@ public class Tenant{
     private String gender;
 
     @OneToMany(mappedBy = "tenant")
-    private Set<Rental> rentals;
+    private List<Rental> rentals;
 
     public Integer getId() {
         return id;
@@ -72,11 +72,11 @@ public class Tenant{
         this.gender = gender;
     }
 
-    public Set<Rental> getRentals() {
+    public List<Rental> getRentals() {
         return rentals;
     }
 
-    public void setRentals(Set<Rental> rentals) {
+    public void setRentals(List<Rental> rentals) {
         this.rentals = rentals;
     }
 

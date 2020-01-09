@@ -15,29 +15,41 @@ public class TenantsService{
     @Autowired
     private TenantsRepository tenantsRepository;
 
-    public List<Tenant> findAllTenants(){
+    public List<Tenant> findAll(){
 
         return tenantsRepository.findAll();
     }
 
-    public Integer saveTenant(Tenant tenant){
+    public Tenant findById(Integer id){
 
-        Tenant savedTenant = tenantsRepository.save(tenant);
-
-        return savedTenant.getId();
+        return tenantsRepository.findById(id).orElse(null);
     }
 
-    public Integer updateTenant(Tenant tenant){
+    public Tenant create(Tenant tenant){
 
-        Tenant updatedTenant = tenantsRepository.save(tenant);
+        return tenantsRepository.save(tenant);
+    }
 
-        return updatedTenant.getId();
+    public Tenant update(Integer id, Tenant tenant){
+
+        Tenant toUpdate = tenantsRepository.findById(id).orElse(null);
+
+        if (toUpdate == null){
+            return null;
+        }else{
+            return tenantsRepository.save(tenant);
+        }
+
 
     }
 
-    public void deleteTenant(Tenant tenant){
+    public void delete(Integer id){
 
-        tenantsRepository.delete(tenant);
+        Tenant toDelete = tenantsRepository.findById(id).orElse(null);
+
+        if (toDelete != null){
+            tenantsRepository.deleteById(id);
+        }
 
     }
 }
