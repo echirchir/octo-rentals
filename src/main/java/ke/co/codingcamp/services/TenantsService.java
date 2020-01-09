@@ -34,4 +34,10 @@ public class TenantsService{
         return updatedTenant.getId();
 
     }
+
+    public void deleteTenant(Tenant tenant){
+
+        tenantsRepository.delete(tenant);
+
+    }
 }
