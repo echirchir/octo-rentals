@@ -20,7 +20,6 @@ public class Tenant{
     private String idnumber;
     private String phonenumber;
     private String gender;
-
     @OneToMany(mappedBy = "tenant")
     private List<Rental> rentals;
 

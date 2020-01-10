@@ -2,10 +2,7 @@ package ke.co.codingcamp.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import ke.co.codingcamp.entities.Rental;
 import ke.co.codingcamp.entities.Tenant;
 import ke.co.codingcamp.services.TenantsService;
 
@@ -33,36 +29,7 @@ public class TenantsController{
         
         List<Tenant> allTenants = tenantsService.findAll();
         
-        //return ResponseEntity.ok(allTenants);
-
-        List<Tenant> list = new ArrayList<>();
-        
-        Tenant tenant = new Tenant();
-        tenant.setId(1);
-        tenant.setFirstname("Elisha");
-        tenant.setLastname("Chirchir");
-        tenant.setGender("Male");
-        tenant.setIdnumber("25922439");
-        tenant.setPhonenumber("0717121909");
-
-        List<Rental> rentals = new ArrayList<>();
-
-        Rental rental = new Rental();
-        rental.setCreated_at("10/01/2020");
-        rental.setDeleted_at("10/01/2020");
-        rental.setFloor(3);
-        rental.setId(1);
-        rental.setIs_open(true);
-        rental.setLocation("Nairobi");
-        rental.setRent_amount(30000);
-        rental.setRooms(4);
-        rental.setUpdated_at("10/01/2020");
-        rental.setTenant(tenant);
-        rentals.add(rental);
-        tenant.setRentals(rentals);
-        list.add(tenant);
-
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(allTenants);
         
     }
 

@@ -2,7 +2,6 @@ package ke.co.codingcamp.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +29,12 @@ public class RentalsController{
         
         List<Rental> allRentals = rentalsService.findAll();
 
-        System.out.println(allRentals.size());
-
         return ResponseEntity.ok(allRentals);
-
-        /*List<Rental> list = new ArrayList<>();
-        list.add(new Rental());
-        list.add(new Rental());
-        list.add(new Rental());
-
-        return ResponseEntity.ok(list);*/
         
     }
 
     @PostMapping("/api/v1/rentals/{id}")
-    public ResponseEntity<Rental> create(@RequestBody Rental rental, @PathVariable Integer id) throws URISyntaxException {
+    public ResponseEntity<Rental> create(@RequestBody Rental rental, @PathVariable("id") Integer id) throws URISyntaxException {
 
         Rental createdRental = rentalsService.create(rental, id);
 
@@ -73,10 +63,10 @@ public class RentalsController{
     }
 
     @PutMapping("/api/v1/rentals/{id}/{tenant}")
-    public ResponseEntity<Rental> update(@RequestBody Rental rental, @PathVariable Integer id, @PathVariable Integer tenant)
+    public ResponseEntity<Rental> update(@RequestBody Rental rental, @PathVariable("id") Integer id, @PathVariable("tenant") Integer tenant){
 
         Rental updatedRental = rentalsService.update(id, rental, tenant);
-        
+
         if (updatedRental == null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -85,7 +75,7 @@ public class RentalsController{
     }
 
     @DeleteMapping("/api/v1/rentals/{id}")
-    public ResponseEntity<Rental> delete(@PathVariable Integer id) {
+    public ResponseEntity<Rental> delete(@PathVariable("id") Integer id) {
 
         rentalsService.delete(id);
 
